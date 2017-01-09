@@ -1,0 +1,25 @@
+# Template file for 'libnids'
+pkgname=libnids
+version=1.24
+revision=1
+build_style=gnu-configure
+configure_args="--enable-shared"
+hostmakedepends="pkg-config"
+makedepends="glib-devel libnet-devel libpcap-devel glib-devel"
+short_desc="Network Intrusion Detection System library"
+maintainer="cipr3s <cipr3s@gmx.com>"
+license="GPL-2"
+homepage="http://libnids.sourceforge.net"
+distfiles="${SOURCEFORGE_SITE}/${pkgname}/${pkgname}-${version}.tar.gz"
+checksum="314b4793e0902fbf1fdb7fb659af37a3c1306ed1aad5d1c84de6c931b351d359"
+
+libnids-devel_package() {
+	depends="${makedepends} ${sourcepkg}>=${version}_${revision}"
+	short_desc+=" - development files"
+	pkg_install() {
+		vmove usr/include
+		vmove usr/lib/*.a
+		vmove usr/lib/*.so
+		vmove usr/share/man
+	}
+}

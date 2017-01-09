@@ -1,0 +1,28 @@
+--- src/Makefile.in.orig	2017-01-08 01:58:29.688696700 +0100
++++ src/Makefile.in	2017-01-09 15:22:20.656230765 +0100
+@@ -6,7 +6,7 @@
+ srcdir		= @srcdir@
+ VPATH		= @srcdir@
+ 
+-install_prefix	=
++install_prefix	= $(DESTDIR)
+ prefix		= @prefix@
+ exec_prefix	= @exec_prefix@
+ includedir	= @includedir@
+@@ -15,7 +15,6 @@
+ LIBSTATIC      = libnids.a
+ LIBSHARED      = libnids.so.1.24
+ 
+-CC		= @CC@
+ CFLAGS		= @CFLAGS@ -DLIBNET_VER=@LIBNET_VER@ -DHAVE_ICMPHDR=@ICMPHEADER@ -DHAVE_TCP_STATES=@TCPSTATES@ -DHAVE_BSD_UDPHDR=@HAVE_BSD_UDPHDR@
+ LDFLAGS		= @LDFLAGS@
+ 
+@@ -62,7 +61,7 @@
+ 
+ 
+ $(LIBSTATIC): $(OBJS)
+-	ar -cr $@ $(OBJS)
++	$(AR) -cr $@ $(OBJS)
+ 	$(RANLIB) $@
+ $(LIBSHARED): $(OBJS_SHARED)
+ 	$(CC) -shared -Wl,-soname,$(LIBSHARED) -o $(LIBSHARED) $(OBJS_SHARED) $(LIBS) $(LNETLIB) $(PCAPLIB)
