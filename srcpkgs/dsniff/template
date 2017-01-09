@@ -1,0 +1,25 @@
+# Template file for 'dsniff'
+pkgname=dsniff
+version=2.4b1
+revision=1
+build_style=gnu-configure
+wrksrc="${pkgname}-2.4"
+patch_args="-Np1"
+hostmakedepends="rpcgen"
+makedepends="libnet-devel db-devel libpcap-devel libnids-devel libressl-devel"
+short_desc="Collection of tools for network auditing and penetration testing"
+maintainer="cipr3s <cipr3s@gmx.com>"
+license="3-clause-BSD"
+homepage="https://www.monkey.org/~dugsong/dsniff"
+distfiles="${homepage}/beta/${pkgname}-${version}.tar.gz"
+checksum="a9803a7a02ddfe5fb9704ce86f0ffc48453c321e88db85810db411ba0841152a"
+
+case "$XBPS_TARGET_MACHINE" in
+	*-musl)
+		makedepends+=" libtirpc-devel"
+		;;
+esac
+
+post_install() {
+	vlicense LICENSE
+}

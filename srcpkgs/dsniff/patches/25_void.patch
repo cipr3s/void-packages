@@ -1,0 +1,55 @@
+diff --unified -ur dsniff-2.4.orig/dnsspoof.8 dsniff-2.4/dnsspoof.8
+--- dsniff-2.4.orig/dnsspoof.8	2000-11-14 16:51:07.000000000 +0100
++++ dsniff-2.4/dnsspoof.8	2017-01-08 03:11:54.936681454 +0100
+@@ -31,7 +31,7 @@
+ address queries on the LAN with an answer of the local machine's IP
+ address.
+ .SH FILES
+-.IP \fI/usr/local/lib/dnsspoof.hosts\fR
++.IP \fI/usr/share/dsniff/dnsspoof.hosts\fR
+ Sample hosts file.
+ .SH "SEE ALSO"
+ dsniff(8), hosts(5)
+diff --unified -ur dsniff-2.4.orig/dsniff.8 dsniff-2.4/dsniff.8
+--- dsniff-2.4.orig/dsniff.8	2000-12-15 17:05:36.000000000 +0100
++++ dsniff-2.4/dsniff.8	2017-01-08 03:12:23.043681357 +0100
+@@ -65,9 +65,9 @@
+ On a hangup signal \fBdsniff\fR will dump its current trigger table to
+ \fIdsniff.services\fR.
+ .SH FILES
+-.IP \fI/usr/local/lib/dsniff.services\fR
++.IP \fI/usr/share/dsniff/dsniff.services\fR
+ Default trigger table
+-.IP \fI/usr/local/lib/dsniff.magic\fR
++.IP \fI/usr/share/dsniff/dsniff.magic\fR
+ Network protocol magic
+ .SH "SEE ALSO"
+ arpspoof(8), libnids(3), services(5), magic(5)
+diff --unified -ur dsniff-2.4.orig/Makefile.in dsniff-2.4/Makefile.in
+--- dsniff-2.4.orig/Makefile.in	2001-03-15 09:34:42.000000000 +0100
++++ dsniff-2.4/Makefile.in	2017-01-08 03:11:31.424681535 +0100
+@@ -8,10 +8,10 @@
+ srcdir          = @srcdir@
+ VPATH           = @srcdir@
+ 
+-install_prefix  =
++install_prefix  = $(DESTDIR)
+ prefix          = @prefix@
+ exec_prefix	= @exec_prefix@
+-libdir		= @libdir@
++libdir		= $(prefix)/share/dsniff
+ sbindir         = @sbindir@
+ mandir		= @mandir@
+ 
+diff --unified -ur dsniff-2.4.orig/pathnames.h dsniff-2.4/pathnames.h
+--- dsniff-2.4.orig/pathnames.h	2001-03-15 09:33:06.000000000 +0100
++++ dsniff-2.4/pathnames.h	2017-01-08 03:12:41.097681294 +0100
+@@ -12,7 +12,7 @@
+ #define PATHNAMES_H
+ 
+ #ifndef DSNIFF_LIBDIR
+-#define DSNIFF_LIBDIR		"/usr/local/lib/"
++#define DSNIFF_LIBDIR		"/usr/share/dsniff/"
+ #endif
+ 
+ #define DSNIFF_SERVICES		"dsniff.services"
