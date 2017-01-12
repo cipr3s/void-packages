@@ -1,0 +1,32 @@
+# Template file for 'python-pyp2p'
+pkgname=python-pyp2p
+version=0.8.2
+revision=1
+build_style=python-module
+wrksrc="pyp2p-${version}"
+pycompile_module="pyp2p"
+noarch=yes
+hostmakedepends="python-setuptools python3-setuptools"
+depends="python python-psutil python-netifaces"
+short_desc="A simplified networking Python2 library for building P2P networks"
+maintainer="cipr3s <cipr3s@gmx.com>"
+license="MIT"
+homepage="http://github.com/Storj/pyp2p"
+distfiles="${PYPI_SITE}/p/pyp2p/pyp2p-${version}.tar.gz"
+checksum="44e4bf9642dc4c781a35d2f43333f173be9f2c46e69b1fdc21b3f31ef4655ef3"
+
+post_install() {
+	$XBPS_FETCH_CMD https://raw.githubusercontent.com/Storj/pyp2p/master/LICENSE
+	vlicense LICENSE
+}
+
+python3-pyp2p_package() {
+	noarch=yes
+	depends="python3 python3-psutil python3-netifaces"
+	pycompile_module="pyp2p"
+	short_desc="${short_desc/Python2/Python3}"
+	pkg_install() {
+		vmove usr/lib/python3*
+		vlicense LICENSE
+	}
+}
